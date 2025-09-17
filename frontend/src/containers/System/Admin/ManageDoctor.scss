@@ -1,0 +1,110 @@
+.manage-doctor-container {
+    padding: 15px;
+    
+    .manage-doctor-title {
+        text-align: center;
+        margin: 15px 0 30px 0;
+        font-size: 20px;
+        text-transform: uppercase;
+        font-weight: 600;
+        color: #0071ba;
+    }
+    .save-content-doctor{
+        margin-top: 20px;
+        margin-bottom: 30px;
+        border-radius: 3px;
+        outline: none;
+        border: none;
+        padding: 5px;
+        background: orange;
+        cursor: pointer;
+
+        &:hover{
+            opacity: 0.9
+        }
+    }
+
+    .create-content-doctor{
+        margin-top: 20px;
+        margin-bottom: 30px;
+        border-radius: 3px;
+        outline: none;
+        border: none;
+        padding: 5px;
+        background: green;
+        cursor: pointer;
+
+        &:hover{
+            opacity: 0.9
+        }
+    }
+
+    .more-infor {
+        display: flex;
+        gap: 30px;
+        padding: 20px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+
+        .content-left {
+            width: 40%;
+
+            label {
+                display: block;
+                margin-bottom: 8px;
+                font-weight: 600;
+                color: #333;
+            }
+
+            .select {
+                &__control {
+                    border-radius: 4px;
+                    border: 1px solid #ced4da;
+                    min-height: 38px;
+                    box-shadow: none;
+
+                    &--is-focused {
+                        border-color: #80bdff;
+                        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+                    }
+                }
+
+                &__menu {
+                    z-index: 10;
+                }
+
+                &__placeholder {
+                    color: #6c757d;
+                }
+            }
+        }
+
+        .content-right {
+            width: 60%;
+
+            label {
+                display: block;
+                margin-bottom: 8px;
+                font-weight: 600;
+                color: #333;
+            }
+
+            textarea {
+                width: 100%;
+                padding: 8px 12px;
+                border: 1px solid #ced4da;
+                border-radius: 4px;
+                resize: vertical;
+                min-height: 100px;
+
+                &:focus {
+                    border-color: #80bdff;
+                    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+                    outline: none;
+                }
+            }
+        }
+    }
+}
