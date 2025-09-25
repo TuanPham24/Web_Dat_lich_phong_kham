@@ -17,12 +17,24 @@ class ManageDoctor extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      //save to markdown table
       contentMarkdown: "",
       contentHTML: "",
       selectedDoctor: "",
       description: "",
       listDoctors: [],
       hasOldData: false,
+
+      //save to doctor_infor table
+      listPrice: [],
+      listProvince: [],
+      listPayment: [],
+      selectedPrice: "",
+      selectedProvince: "",
+      selectedPayment: "",
+      nameClinic: "",
+      addressClinic: "",
+      note: "",
     };
   }
 
@@ -108,25 +120,56 @@ class ManageDoctor extends Component {
     let { hasOldData } = this.state;
     return (
       <div className="manage-doctor-container">
-        <div className="manage-doctor-title">Tạo thêm thông tin doctor</div>
+        <div className="manage-doctor-title">
+          <FormattedMessage id="admin.manage-doctor.title" />
+        </div>
         <div className="more-infor">
           <div className="content-left form-group">
-            <label>Chọn bác sĩ</label>
+            <label>
+              <FormattedMessage id="admin.manage-doctor.select-doctor" />
+            </label>
             <Select
               value={this.state.selectedDoctor}
               onChange={this.handleChangeSelect}
               options={this.state.listDoctors}
-              className="form-control"
+              placeholder="Chọn bác sĩ"
             />
           </div>
-          <div className="content-right form-group">
-            <label>Thông tin giới thiệu:</label>
+          <div className="content-right">
+            <label>
+              <FormattedMessage id="admin.manage-doctor.intro" />
+            </label>
             <textarea
               className="form-control"
-              rows="4"
               onChange={(event) => this.handleOnChangeDesc(event)}
               value={this.state.description}
             ></textarea>
+          </div>
+        </div>
+        <div className="more-infor-extra row">
+          <div className="col-4 form-group">
+            <label>Chọn giá</label>
+            <input className="form-control" />
+          </div>
+          <div className="col-4 form-group">
+            <label>Chọn phương thức thanh toán</label>
+            <input className="form-control" />
+          </div>
+          <div className="col-4 form-group">
+            <label>Chọn tỉnh thành</label>
+            <input className="form-control" />
+          </div>
+          <div className="col-4 form-group">
+            <label>Tên phòng khám</label>
+            <input className="form-control" />
+          </div>
+          <div className="col-4 form-group">
+            <label>Địa chỉ phòng khám</label>
+            <input className="form-control" />
+          </div>
+          <div className="col-4 form-group">
+            <label>Note</label>
+            <input className="form-control" />
           </div>
         </div>
         <div className="manage-doctor-editor">
@@ -146,9 +189,13 @@ class ManageDoctor extends Component {
           onClick={() => this.handleSaveContentMarkdown()}
         >
           {hasOldData === true ? (
-            <span>Lưu thông tin</span>
+            <span>
+              <FormattedMessage id="admin.manage-doctor.save" />
+            </span>
           ) : (
-            <span>Tạo thông tin</span>
+            <span>
+              <FormattedMessage id="admin.manage-doctor.add" />
+            </span>
           )}
         </button>
       </div>
