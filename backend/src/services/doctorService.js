@@ -1,6 +1,6 @@
 import db from "../models/index";
 require("dotenv").config();
-import _ from "lodash";
+import _, { includes } from "lodash";
 
 const MAX_NUMBER_SCHEDULE = process.env.MAX_NUMBER_SCHEDULE;
 
@@ -285,6 +285,53 @@ let getScheduleByDate = (doctorId, date) => {
     }
   });
 };
+
+let getExtraInforDoctorById = (idInput) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (!idInput) {
+        resolve({
+          errCode: 1,
+          errMessage: "Missing required parameter!",
+        });
+      } else {
+        let data = await db.Doctor_Infor.findOne({
+          where: {
+            doctorId: idInput,
+          },
+          attributes: {
+            exclude: ["id", "doctorId"],
+          },
+          includes: [
+            {
+              model: db.AllCode,
+              as: "priceTypeDataa",
+              attributes: ["valueEn", "valueVi"],
+            },
+            {
+              model: db.AllCode,
+              as: "provinceTypeDataa",
+              attributes: ["valueEn", "valueVi"],
+            },
+            {
+              model: db.AllCode,
+              as: "paymentTypeDataa",
+              attributes: ["valueEn", "valueVi"],
+            },
+          ],
+        });
+        if (!data) data = {};
+        resolve({
+          errCode: 0,
+          data: data,
+        });
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
 module.exports = {
   getTopDoctorHome: getTopDoctorHome,
   getAllDoctors: getAllDoctors,
@@ -292,4 +339,5 @@ module.exports = {
   getDetailDoctorById: getDetailDoctorById,
   bulkCreateSchedule: bulkCreateSchedule,
   getScheduleByDate: getScheduleByDate,
+  getExtraInforDoctorById: getExtraInforDoctorById,
 };
