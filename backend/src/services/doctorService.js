@@ -302,23 +302,25 @@ let getExtraInforDoctorById = (idInput) => {
           attributes: {
             exclude: ["id", "doctorId"],
           },
-          includes: [
+          include: [
             {
-              model: db.AllCode,
-              as: "priceTypeDataa",
+              model: db.Allcode,
+              as: "priceTypeData",
               attributes: ["valueEn", "valueVi"],
             },
             {
-              model: db.AllCode,
-              as: "provinceTypeDataa",
+              model: db.Allcode,
+              as: "provinceTypeData",
               attributes: ["valueEn", "valueVi"],
             },
             {
-              model: db.AllCode,
-              as: "paymentTypeDataa",
+              model: db.Allcode,
+              as: "paymentTypeData",
               attributes: ["valueEn", "valueVi"],
             },
           ],
+          raw: false,
+          nest: true,
         });
         if (!data) data = {};
         resolve({

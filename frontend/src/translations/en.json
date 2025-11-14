@@ -70,6 +70,13 @@
             "no-schedule":"Doctor does not have a schedule in this time, please select another time!",
             "choose":"Choose ",
             "book-free":" and book (free)"
+        },
+        "extra-infor":{
+            "text-address": "Examination address",
+            "price": "Examination price: ",
+            "payment": "The patient can pay the cost in the form of: ", 
+            "detail": "See details",
+            "hide-price": "Hide price list"
         }
     },
     "admin":{
