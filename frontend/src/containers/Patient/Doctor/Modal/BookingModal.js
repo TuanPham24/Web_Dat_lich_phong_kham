@@ -4,6 +4,7 @@ import { FormattedMessage } from "react-intl";
 import "./BookingModal.scss";
 import { Modal } from "reactstrap";
 import ProfileDoctor from "../ProfileDoctor";
+import _ from "lodash";
 
 class BookingModal extends Component {
   constructor(props) {
@@ -20,6 +21,11 @@ class BookingModal extends Component {
 
   render() {
     let { isOpen, closeTab, dataScheduleTime } = this.props;
+    let doctorId =
+      dataScheduleTime && !_.isEmpty(dataScheduleTime)
+        ? dataScheduleTime.doctorId
+        : "";
+    console.log("data props from modal:", this.props);
     return (
       <div>
         <Modal
@@ -28,7 +34,6 @@ class BookingModal extends Component {
           size="lg"
           centered
         >
-          <ProfileDoctor />
           <div className="booking-modal-content">
             <div className="booking-modal-header">
               <span className="left">Thông tin đặt lịch khám bệnh</span>
@@ -36,8 +41,12 @@ class BookingModal extends Component {
                 <i className="fas fa-times" onClick={closeTab}></i>
               </span>
             </div>
+            <ProfileDoctor
+              doctorId={doctorId}
+              isShowDes={false}
+              dataTime={dataScheduleTime}
+            />
             <div className="booking-modal-body">
-              <div className="price">Giá khám 5000VND</div>
               <div className="row">
                 <div className="col-6 form-group">
                   <label>Họ tên</label>
