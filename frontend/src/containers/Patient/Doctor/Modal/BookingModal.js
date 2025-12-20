@@ -173,12 +173,17 @@ class BookingModal extends Component {
                 <i className="fas fa-times" onClick={closeTab}></i>
               </span>
             </div>
-            <ProfileDoctor
-              doctorId={doctorId}
-              isShowDes={false}
-              dataTime={dataTime}
-            />
+
             <div className="booking-modal-body">
+              <div className="doctor-infor">
+                <ProfileDoctor
+                  doctorId={doctorId}
+                  isShowDes={false}
+                  dataTime={dataTime}
+                  isShowLinkDetail={false}
+                  isShowPrice={true}
+                />
+              </div>
               <div className="row">
                 <div className="col-6 form-group">
                   <label>
