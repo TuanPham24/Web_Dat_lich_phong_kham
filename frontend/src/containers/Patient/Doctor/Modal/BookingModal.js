@@ -12,6 +12,7 @@ import { postPatientBookAppointment } from "../../../../services/userService";
 import { toast } from "react-toastify";
 import _ from "lodash";
 import moment from "moment";
+import LoadingOverLay from "react-loading-overlay";
 
 class BookingModal extends Component {
   constructor(props) {
@@ -27,6 +28,7 @@ class BookingModal extends Component {
       genders: "",
       doctorId: "",
       timeType: "",
+      isShowLoading: false,
     };
   }
 
@@ -94,6 +96,9 @@ class BookingModal extends Component {
   };
 
   handleConfirmBooking = async () => {
+    this.setState({
+      isShowLoading: true,
+    });
     let date = new Date(this.state.birthday).getTime();
     let timeString = this.buildTimeBooking(this.props.dataTime);
     let doctorName = this.buildDoctorName(this.props.dataTime);
@@ -111,6 +116,9 @@ class BookingModal extends Component {
       language: this.props.language,
       timeString: timeString,
       doctorName: doctorName,
+    });
+    this.setState({
+      isShowLoading: false,
     });
 
     if (res && res.errCode === 0) {
@@ -158,12 +166,16 @@ class BookingModal extends Component {
     let doctorId = dataTime && !_.isEmpty(dataTime) ? dataTime.doctorId : "";
     console.log("data props from modal:", this.props);
     return (
-      <div>
-        <Modal
-          isOpen={isOpen}
-          className="booking-modal-container"
-          size="lg"
-          centered
+      <Modal
+        isOpen={isOpen}
+        className="booking-modal-container"
+        size="lg"
+        centered
+      >
+        <LoadingOverLay
+          active={this.state.isShowLoading}
+          spinner
+          text="Loading..."
         >
           <div className="booking-modal-content">
             <div className="booking-modal-header">
@@ -272,8 +284,8 @@ class BookingModal extends Component {
               </button>
             </div>
           </div>
-        </Modal>
-      </div>
+        </LoadingOverLay>
+      </Modal>
     );
   }
 }
