@@ -4,9 +4,8 @@ import "./ManageSchedule.scss";
 import { FormattedMessage } from "react-intl";
 import Select from "react-select";
 import * as actions from "../../../store/actions";
-import { CRUD_ACTIONS, LANGUAGES, dateFormat } from "../../../utils";
+import { LANGUAGES } from "../../../utils";
 import DatePicker from "../../../components/Input/DatePicker";
-import moment from "moment";
 import { toast } from "react-toastify";
 import _ from "lodash";
 import { saveBulkScheduleDoctor } from "../../../services/userService";
@@ -130,10 +129,18 @@ class ManageSchedule extends Component {
       doctorId: selectedDoctor.value,
       formatedDate: formatedDate,
     });
+
+    if (res && res.errCode === 0) {
+      toast.success("Save infor succeed");
+    } else {
+      toast.error("Error save");
+      console.log("Error save >> res:", res);
+    }
   };
   render() {
     let { rangeTime } = this.state;
     let { language } = this.props;
+    let yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
     return (
       <React.Fragment>
         <div className="manage-schedule-container">
@@ -160,7 +167,7 @@ class ManageSchedule extends Component {
                   onChange={this.handleOnchangeDatePicker}
                   className="form-control"
                   value={this.state.currentDate}
-                  minDate={new Date()}
+                  minDate={yesterday}
                 />
               </div>
               <div className="col-12 pick-hour-container">

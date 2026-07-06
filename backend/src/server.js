@@ -9,7 +9,10 @@ require("dotenv").config();
 let app = express();
 
 app.use(function (req, res, next) {
-  res.setHeader("Access-Control-Allow-Origin", process.env.URL_REACT);
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    process.env.URL_REACT || "http://localhost:3000"
+  );
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET, POST, OPTIONS, PUT, PATCH, DELETE"
@@ -32,8 +35,9 @@ viewEngine(app);
 initWebRoutes(app);
 connectDB();
 
-let port = process.env.PORT || 6969;
+// Prefer BACKEND_PORT, then PORT; default to 8082
+let port = process.env.BACKEND_PORT || process.env.PORT || 8082;
 
 app.listen(port, () => {
-  console.log("Backend");
+  console.log(`Backend listening on port ${port}`);
 });
